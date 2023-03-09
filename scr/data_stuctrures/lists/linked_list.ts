@@ -8,7 +8,7 @@ export class LinkedList<T> {
 
     private size: number;
 
-    public LinkedList() {
+    constructor() {
         this.initialize();
     }
 
@@ -186,5 +186,23 @@ export class LinkedList<T> {
         if (index < 0 || index >= this.size) {
             throw Error("Invalid index");
         }
+    }
+
+    public clone(): LinkedList<T> {
+        const clone: LinkedList<T> = new LinkedList();
+
+        if (this.isEmpty()) {
+            return clone;
+        }
+
+        let current: LinkedNode<T> = this.head!;
+        clone.addFirst(current.getValue());
+
+        while (current.hasNext()) {
+            current = current.getNext()!;
+            clone.addLast(current.getValue());
+        }
+
+        return clone;
     }
 }

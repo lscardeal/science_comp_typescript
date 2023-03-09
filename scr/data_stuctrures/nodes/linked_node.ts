@@ -4,9 +4,9 @@ export class LinkedNode<T> {
 
     private next: LinkedNode<T> | undefined;
 
-    constructor(value: T) {
+    constructor(value: T, next: LinkedNode<T> | undefined = undefined) {
         this.value = value;
-        this.next = undefined;
+        this.next = next;
     }
 
     public getValue(): T {
