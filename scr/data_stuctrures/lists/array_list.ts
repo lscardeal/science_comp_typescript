@@ -1,4 +1,4 @@
-export class ArrayList<T> {
+export class ArrayList<T> implements Iterable<T> {
 
     private elements: T[];
 
@@ -94,5 +94,20 @@ export class ArrayList<T> {
 			throw Error("Invalid index");
 		}
 	}
+
+    public [Symbol.iterator](): Iterator<T> {
+        let index = 0;
+        const element = this.elements;
+    
+        return {
+          next(): IteratorResult<T> {
+            if (index < this.size) {
+              return { value: this.elements[index++], done: false };
+            } else {
+              return { value: null, done: true };
+            }
+          }
+        };
+      }
 
 }
