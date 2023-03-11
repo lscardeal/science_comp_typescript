@@ -17,9 +17,6 @@ export class SearchBinaryTree<T> {
     public insert(value: T) {
         const node = new BinaryNode(value);
         this.insertHandler(this.root, node);
-        if (this.insertions === this.INSERTIONS_TO_BALANCE) {
-            this.balance();
-        }
     }
 
     private insertHandler(current: BinaryNode<T>, node: BinaryNode<T>) {
