@@ -16,23 +16,23 @@ export class SearchBinaryTree<T> {
 
     public insert(value: T) {
         const node = new BinaryNode(value);
-        this.insertHandler(this.root, node);
+        this.insertHelper(this.root, node);
     }
 
-    private insertHandler(current: BinaryNode<T>, node: BinaryNode<T>) {
+    private insertHelper(current: BinaryNode<T>, node: BinaryNode<T>) {
         if (node.getValue() < current.getValue()) {
             if (!current.hasLeft()) {
                 current.setLeft(node);
                 this.insertions++;
             } else {
-                this.insertHandler(current.getLeft()!, node);
+                this.insertHelper(current.getLeft()!, node);
             }
         } else if (node.getValue() > current.getValue()) {
             if (!current.hasRight()) {
                 current.setRight(node);
                 this.insertions++;
             } else {
-                this.insertHandler(current.getRight()!, node);
+                this.insertHelper(current.getRight()!, node);
             }
         }
     }
@@ -60,19 +60,19 @@ export class SearchBinaryTree<T> {
     }
 
     public height(): number {
-        return this.heightHandler(this.root);
+        return this.heightHelper(this.root);
     }
 
-    private heightHandler(node: BinaryNode<T>): number {
+    private heightHelper(node: BinaryNode<T>): number {
         if (node.isFull()) {
-            const leftheight = this.heightHandler(node.getLeft()!);
-            const rightHeight = this.heightHandler(node.getRight()!);
+            const leftheight = this.heightHelper(node.getLeft()!);
+            const rightHeight = this.heightHelper(node.getRight()!);
             const height = leftheight > rightHeight ? leftheight : rightHeight;
             return height + 1;
         } else if (node.hasLeft()) {
-            return this.heightHandler(node.getLeft()!) + 1;
+            return this.heightHelper(node.getLeft()!) + 1;
         } else if (node.hasRight()) {
-            return this.heightHandler(node.getRight()!) + 1;
+            return this.heightHelper(node.getRight()!) + 1;
         }
 
         return 1;
